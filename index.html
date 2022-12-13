@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<style type="text/css">
+html,body {height:100%;width:100%;margin:0;padding:0;}
+
+body {
+	--safe-area-inset-top: env(safe-area-inset-top);
+	--safe-area-inset-bottom: env(safe-area-inset-bottom);
+	--safe-area-inset-left: env(safe-area-inset-left);
+	--safe-area-inset-right: env(safe-area-inset-right);
+
+	padding-top: env(safe-area-inset-top);
+	padding-right: env(safe-area-inset-right);
+	padding-bottom: env(safe-area-inset-bottom);
+	padding-left: env(safe-area-inset-left);
+}
+pre {
+	font-size: 2.0em;
+}
+
+</style>
+</head>
+<body>
+<input type="button" value="check" onclick="onCheck()">
+<br>
+<pre id="preId"></pre>
+
+<script>
+function onCheck() {
+
+	let bodyEl = document.getElementsByTagName('body')[0];
+	var computed = window.getComputedStyle(bodyEl);
+
+	let str = "";
+	str += "width:" + computed.getPropertyValue('width');
+	str += ", ";
+	str += "height:" + computed.getPropertyValue('height');
+	str += "\n";
+	str += "top:" + computed.getPropertyValue('--safe-area-inset-top');
+	str += ", ";
+	str += "bottom:" + computed.getPropertyValue('--safe-area-inset-bottom');
+	str += "\n";
+	str += "left:" + computed.getPropertyValue('--safe-area-inset-left');
+	str += ", ";
+	str += "right:" + computed.getPropertyValue('--safe-area-inset-right');
+
+	let preEl = document.getElementById('preId');
+	preEl.innerHTML = str;
+}
+</script>
+</body>
+</html>
