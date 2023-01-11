@@ -1,0 +1,24 @@
+html {
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+}
+
+section {
+  scroll-snap-align: start;
+  display: grid;
+  height: 100vh;
+  place-content: center;
+}
+
+section:nth-child(odd) {
+  background-color:  rgb(58.44% 90.74% 58.27%);
+}
+
+section:nth-child(even) {
+  background-color: rgb(24.4% 93.14% 82.45%);
+}
