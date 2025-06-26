@@ -1,0 +1,52 @@
+body, header { margin: 0;}
+
+header {
+  display:flex;
+}
+
+/* on mobile, where browser chrome covers viewport let's use  */
+div.inner {
+  height: var(--inner-height);
+  background-color: red;
+}
+
+/*  inner height is not recalced until a user refreshes so lets use 100vh on desktop */
+@media (min-width: 1024px) {
+div.inner {
+  height: 100vh;
+  background-color: red;
+}
+}
+
+div.full {
+  height: 100vh;
+  background-color: blue;
+}
+
+div.dynamic {
+  height: 100dvh;
+  background-color: black;
+}
+
+div.short {
+  height: 100svh;
+  background-color: silver;
+}
+
+div {
+  padding: 5px;
+  color:white;
+  width: 50vw;
+  font-family: arial;
+  font-size: 1rem;
+}
+
+p{
+  font-family: georgia, serif;
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(100% - 40px);
+}
