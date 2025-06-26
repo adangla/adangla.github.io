@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="vh.css">
 </head>
 <body>
@@ -10,7 +11,24 @@
     <div class="short">100svh</div>
   
   </header>
-
+      <script>
+     $(document).ready(function(e) {
+   showViewportSize();    
+});
+$(window).resize(function(e) {
+   showViewportSize();
+});
+function showViewportSize() {
+   var the_height = $(window).height();
+   $('#height').text(the_height);
+}
+    </script>
+<script>
+let h = window.innerHeight;
+document.getElementById("demo").innerHTML = "<br>Inner Height: " + h;
+</script>
+<p id="demo"></p>
+<p id="height">Resize to find out!</p>
 <p><a href="https://codepen.io/peterrentz/pen/NWeoZJx/b4452f4f5cc0fb546f56f34572959bc5">edit me in codepen</a></p>
 <p>The United States economy surged in the third quarter as a strong job market and falling inflation gave consumers the confidence to spend freely on goods and services.</p>
 
