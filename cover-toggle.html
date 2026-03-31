@@ -2,17 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- The ID allows us to target and modify this tag with JavaScript -->
     <meta name="viewport" id="viewport-meta" content="width=device-width, initial-scale=1.0">
-    <title>Viewport-fit Toggle Test</title>
+    <title>Safe Area Content Test</title>
     <style>
-        /* Base styles with a purple background to make the notch area visible */
+        /* The body is dark so you can see where the browser adds letterboxing 
+           when viewport-fit=cover is NOT active. */
         body {
+            margin: 0;
+            background-color: #111111; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* The content div gets the purple background */
+        .content {
             background-color: #663399; /* RebeccaPurple */
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -20,6 +24,17 @@
             justify-content: center;
             text-align: center;
             box-sizing: border-box;
+
+            /* 
+               CRITICAL PART: 
+               Use max() to provide a default 20px padding, but switch to the 
+               safe-area-inset if it's larger (e.g., when the notch is present 
+               and viewport-fit=cover is active). 
+            */
+            padding-top: max(20px, env(safe-area-inset-top));
+            padding-right: max(20px, env(safe-area-inset-right));
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            padding-left: max(20px, env(safe-area-inset-left));
         }
 
         h1 {
@@ -31,76 +46,4 @@
             font-size: 18px;
             font-weight: bold;
             color: #663399;
-            background-color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .status-container {
-            margin-top: 24px;
-            padding: 16px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            max-width: 90%;
-            word-break: break-all;
-        }
-
-        code {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Viewport-Fit Test</h1>
-    <p>Rotate your phone to <strong>landscape mode</strong> to see the purple background bleed into the notch/safe area when active.</p>
-
-    <button id="toggle-btn">Enable Viewport-Fit=Cover</button>
-
-    <div class="status-container">
-        <p>Current Viewport Content:</p>
-        <code id="status-text">width=device-width, initial-scale=1.0</code>
-    </div>
-
-    <script>
-        const toggleBtn = document.getElementById('toggle-btn');
-        const viewportMeta = document.getElementById('viewport-meta');
-        const statusText = document.getElementById('status-text');
-        
-        // Track the current state
-        let isCoverActive = false;
-
-        toggleBtn.addEventListener('click', () => {
-            isCoverActive = !isCoverActive;
-
-            if (isCoverActive) {
-                // Add viewport-fit=cover
-                const newContent = 'width=device-width, initial-scale=1.0, viewport-fit=cover';
-                viewportMeta.setAttribute('content', newContent);
-                
-                // Update UI
-                statusText.innerText = newContent;
-                toggleBtn.innerText = 'Disable Viewport-Fit=Cover';
-            } else {
-                // Remove viewport-fit=cover
-                const defaultContent = 'width=device-width, initial-scale=1.0';
-                viewportMeta.setAttribute('content', defaultContent);
-                
-                // Update UI
-                statusText.innerText = defaultContent;
-                toggleBtn.innerText = 'Enable Viewport-Fit=Cover';
-            }
-        });
-    </script>
-</body>
-</html>
+            background-color
